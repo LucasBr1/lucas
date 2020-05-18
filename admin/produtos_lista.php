@@ -1,6 +1,8 @@
 <?php
 // Incluir o arquivo e fazer a conexão
 include("../Connections/conn_produtos.php");
+// Definindo o USE do Banco de Dados
+mysqli_select_db($conn_produtos,$database_conn);
 // Selecionar os dados
 $consulta = "SELECT * FROM tbprodutos ORDER BY descri_produto ASC";
 // Fazer a lista completa dos dados

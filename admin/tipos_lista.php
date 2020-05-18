@@ -1,5 +1,6 @@
 <?php
 include("../Connections/conn_produtos.php");
+mysqli_select_db($conn_produtos,$database_conn);
 $consulta = "SELECT * FROM tbtipos ORDER BY rotulo_tipo ASC";
 $lista = $conn_produtos->query($consulta);
 $row = $lista->fetch_assoc();

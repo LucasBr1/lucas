@@ -1,5 +1,6 @@
 <?php
 include("../Connections/conn_produtos.php");
+mysqli_select_db($conn_produtos,$database_conn);
 $consulta = "SELECT * FROM tbusuarios ORDER BY login_usuario ASC";
 $lista = $conn_produtos->query($consulta);
 $row = $lista->fetch_assoc();
@@ -20,7 +21,6 @@ $totalRows = ($lista)->num_rows;
             <tr>
                 <th>ID</th><!-- Cabeça da Coluna -->
                 <th>LOGIN</th>
-                <th>SENHA</th>
                 <th>NÍVEL</th>
                 <th>ADICIONAR</th>
             </tr>
@@ -30,7 +30,6 @@ $totalRows = ($lista)->num_rows;
             <tr>
                 <td><?php echo $row['id_usuario']; ?></td>
                 <td><?php echo $row['login_usuario']; ?></td>
-                <td><?php echo $row['senha_usuario']; ?></td>
                 <td><?php echo $row['nivel_usuario']; ?></td>
                 <td>ALTERAR|EXCLUIR</td>
             </tr>
