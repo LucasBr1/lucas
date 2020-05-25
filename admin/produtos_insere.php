@@ -29,10 +29,11 @@ if($_POST){
                     (".$valores_insert.")";
     $resultado  = $conn_produtos->query($insertSQL);
     
-    // Após a ação a Página será Redirecionada
+    // Após a Ação a Página será Redirecionada
+    $destino    = "produtos_lista.php";
     if (mysqli_insert_id($conn_produtos)){
         header("Location: $destino");
-    }else {
+    }else{
         header("Location: $destino");
     };
 }
