@@ -1,28 +1,27 @@
 <?php 
 include("../Connections/conn_produtos.php");
 
+// Variaveis Globais
+$tabela         = "tbtipos";
+$campo_filtro   = "id_tipo";
+
 if ($_POST){
     // Definindo o USE do Banco de Dados
     mysqli_select_db($conn_produtos,$database_conn);
     
-    // Variéveis para Acrescentar Dados ao Banco
-    $tabela_insert  = "tbtipos";
-    $campos_insert  = "sigla_tipo, rotulo_tipo";
-    
     // Receber os Dados do Formulário
-    // Organize os ampos na mesma ordem
     $sigla_tipo    = $_POST["sigla_tipo"];
     $rotulo_tipo   = $_POST["rotulo_tipo"];
     
-    // Reunir os Valores a Serem Inseridos
-    $valores_insert = "'$sigla_tipo','$rotulo_tipo'";
+    // Campo para filtrar o registro (WHERE)
+    $filtro_update = $_POST['id_tipo'];
     
     // Consulta SQL para Inserção dos Dados
-    $insertSQL  =   "INSERT INTO ".$tabela_insert." 
-                        (".$campos_insert.")
-                    VALUES
-                    (".$valores_insert.")";
-    $resultado  = $conn_produtos->query($insertSQL);
+    $updateSQL  =   "UPDATE ".$tabela." 
+                    SET sigla_tipo = '".$sigla_tipo."',
+                        rotulo_tipo = '".$rotulo_tipo."'
+                    WHERE ".$campo_filtro."='".$filtro_update."'";
+    $resultado  = $conn_produtos->query($updateSQL);
     
     // Após a Ação a Página será Redirecionada
     $destino    = "tipos_lista.php";
@@ -32,11 +31,22 @@ if ($_POST){
         header("Location: $destino");
     };
 }
+
+// Consulta para Trazer e Filtrar os Dados
+// Definindo o USE do Banco de Dados
+mysqli_select_db($conn_produtos,$database_conn);
+$filtro_select  = $_GET['id_tipo'];
+$consulta       = "SELECT *
+                  FROM ".$tabela."
+                  WHERE ".$campo_filtro."=".$filtro_select."";
+$lista          = $conn_produtos->query($consulta);
+$row            = $lista->fetch_assoc();
+$totalRows      = ($lista)->num_rows;
 ?>
 <!doctype html>
 <html lang="pt-br">
 <head>
-    <title>Tipos - Insere</title>
+    <title>Tipos - Atualiza</title>
     <meta charset="utf-8">
     <!-- Link arquivos Bootstrap css -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,18 +65,20 @@ if ($_POST){
                       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                   </button>
               </a>
-               Inserindo Tipos
+               Atualizando Tipos
             </h2>
             <div class="thumbnail">
                 <div class="alert alert-warning">
-                    <form action="tipos_insere.php" name="form_insere_tipo" id="form_insere_tipo" method="post" enctype="multipart/form-data">
+                    <form action="tipos_atualiza.php" name="form_atualiza_tipo" id="form_atualiza_tipo" method="post" enctype="multipart/form-data">
+                      <!-- Inserir o Campo id_tipo Oculto pra Uso em Filtro -->
+                      <input type="hidden" name="id_tipo" id="id_tipo" value="<?php echo $row['id_tipo']; ?>">
                        <!-- input rotulo_tipo -->
                         <label for="rotulo_tipo">Rótulo</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-apple" aria-hidden="true"></span>
                             </span>
-                            <input type="text" name="rotulo_tipo" id="rotulo_tipo" autofocus maxlength="15" placeholder="Digite o Tipo do Produto." class="form-control" required>
+                            <input type="text" name="rotulo_tipo" id="rotulo_tipo" autofocus maxlength="15" placeholder="Digite o Tipo do Produto." class="form-control" required value="<?php echo $row['rotulo_tipo']; ?>">
                         </div>
                         <br>
                         <!-- input sigla_tipo -->
@@ -75,11 +87,11 @@ if ($_POST){
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                             </span>
-                            <input type="text" name="sigla_tipo" id="sigla_tipo" maxlength="3" placeholder="Digite a Sigla do Tipo" class="form-control" required>
+                            <input type="text" name="sigla_tipo" id="sigla_tipo" maxlength="3" placeholder="Digite a Sigla do Tipo" class="form-control" required value="<?php echo $row['sigla_tipo']; ?>">
                         </div>
                         <br>
                         <!-- btn enviar -->
-                        <input type="submit" value="Cadastrar" role="button" name="enviar" id="enviar" class="btn btn-block btn-warning">
+                        <input type="submit" value="Atualizar" role="button" name="enviar" id="enviar" class="btn btn-block btn-warning">
                     </form>
                 </div>
             </div>
@@ -92,3 +104,4 @@ if ($_POST){
     <script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
+<?php mysqli_free_result($lista); ?>

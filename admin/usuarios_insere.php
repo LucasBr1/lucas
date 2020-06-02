@@ -43,8 +43,10 @@ if ($_POST){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/meu_estilo.css" type="text/css">
 </head>
-<body>
+<body class="fundofixo">
+<?php include "menu_adm.php"; ?>
 <main class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
@@ -65,7 +67,7 @@ if ($_POST){
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             </span>
-                            <input type="text" name="login_usuario" id="login_usuario" maxlength="30" placeholder="Digite o Login do Usuário." class="form-control" required autofocus autocomplete="off">
+                            <input type="text" name="login_usuario" id="login_usuario" maxlength="30" placeholder="Digite o seu Login." class="form-control" required autofocus autocomplete="off">
                         </div>
                         <br>
                         <!-- password senha_usuario -->
@@ -74,17 +76,17 @@ if ($_POST){
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                             </span>
-                            <input class="form-control" type="password" name="senha_usuario" id="senha_usuario" placeholder="Digite a Senha do Usuário." maxlength="8" required autocomplete="off">
+                            <input class="form-control" type="password" name="senha_usuario" id="senha_usuario" placeholder="Digite a Senha Desejada." maxlength="8" required autocomplete="off">
                         </div>
                         <br>
                         <!-- Radio nivel_usuario -->
-                        <label for="nivel_usuario">Nível:</label>
+                        <label for="nivel_usuario">Nível do Usuário?</label>
                         <div class="input-group">
                             <label class="radio-inline" for="nivel_usuario_c">
-                                <input type="radio" name="nivel_usuario" id="nivel_usuario" value="com">Comum
+                                <input type="radio" name="nivel_usuario" id="nivel_usuario" value="com" checked>Comum
                             </label>
                             <label class="radio-inline" for="nivel_usuario_s">
-                                <input type="radio" name="nivel_usuario" id="nivel_usuario" value="sup" checked>Super Usuário
+                                <input type="radio" name="nivel_usuario" id="nivel_usuario" value="sup">Supervisor
                             </label>
                         </div>
                         <br>
