@@ -67,7 +67,7 @@ $totalRows = ($lista)->num_rows;
                     <?php echo $row['descri_produto']; ?>
                 </td>
                 <td><?php echo $row['resumo_produto']; ?></td>
-                <td><?php echo number_format($row['valor_produto'],2,',','.') ?>
+                <td><?php echo number_format($row['valor_produto'],2,',','.'); ?>
                 <!-- Vírgula >> 0,00 >> Separador de decimais
                      Ponto >> 1.000 >> Separador de milhares -->
                 </td>
