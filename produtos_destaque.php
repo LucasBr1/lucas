@@ -3,17 +3,17 @@
 include("Connections/conn_produtos.php");
 
 // Consulta pra Trazer os Dados e se Necessário Filtrar
-$tabela        = "vw_tbprodutos";
-$campo_filtro  = "destaque_produto";
-$filtro_select = "Não";
-$ordenar_por    = "descri_produto ASC";
-$consulta   =   "SELECT *
-                FROM ".$tabela."
-                WHERE ".$campo_filtro."='".$filtro_select."'
-                ORDER BY ".$ordenar_por."";
-$lista      =   $conn_produtos->query($consulta);
-$row        =   $lista->fetch_assoc();
-$totalRows  =   ($lista)->num_rows;
+$tabela_destaque        = "vw_tbprodutos";
+$campo_filtro_destaque  = "destaque_produto";
+$filtro_select_destaque = "Sim";
+$ordenar_por_destaque   = "descri_produto ASC";
+$consulta_destaque   =   "SELECT *
+                        FROM ".$tabela_destaque."
+                        WHERE ".$campo_filtro_destaque."='".$filtro_select_destaque."'
+                        ORDER BY ".$ordenar_por_destaque."";
+$lista_destaque      =   $conn_produtos->query($consulta_destaque);
+$row_destaque        =   $lista_destaque->fetch_assoc();
+$totalRows_destaque  =   ($lista_destaque)->num_rows;
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -30,7 +30,7 @@ $totalRows  =   ($lista)->num_rows;
 </head>
 
 <body class="container">
-    <h2 class="breadcrumb alert-danger">Produtos</h2>
+    <h2 class="breadcrumb alert-danger"><strong>Destaques</strong></h2>
     <div class="row">
         <!-- Manter os Elementos na Linha -->
         <!-- Abre a Estrutura de Repetição -->
@@ -39,28 +39,28 @@ $totalRows  =   ($lista)->num_rows;
         <div class="col-sm-6 col-md-4">
             <!-- Dimensionamento -->
             <div class="thumbnail">
-                <a href="produto_detalhe.php?id_produto=<?php echo $row['id_produto']; ?>">
-                    <img src="imagens/<?php echo $row['imagem_produto']; ?>" alt="" class="img-responsive img-rounded" style="height: 20em;">
+                <a href="produto_detalhe.php?id_produto=<?php echo $row_destaque['id_produto']; ?>">
+                    <img src="imagens/<?php echo $row_destaque['imagem_produto']; ?>" alt="" class="img-responsive img-rounded" style="height: 20em;">
                 </a>
                 <div class="caption text-right">
                     <h3 class="text-danger">
-                        <strong><?php echo $row['descri_produto']; ?></strong>
+                        <strong><?php echo $row_destaque['descri_produto']; ?></strong>
                     </h3>
                     <p class="text-warning">
-                        <strong><?php echo $row['rotulo_tipo']; ?></strong>
+                        <strong><?php echo $row_destaque['rotulo_tipo']; ?></strong>
                     </p>
                     <p class="text-left">
-                        <?php echo mb_strimwidth($row['resumo_produto'],0,42,'...'); ?>
+                        <?php echo mb_strimwidth($row_destaque['resumo_produto'],0,42,'...'); ?>
                     </p>
                     <p>
                         <button class="btn btn-default disabled" role="button">
-                            <?php echo number_format($row['valor_produto'],2,',','.'); ?>
+                            <?php echo number_format($row_destaque['valor_produto'],2,',','.'); ?>
                         </button>
-                        <a href="produto_detalhe.php?id_produto=<?php echo $row['id_produto']; ?>" class="btn btn-danger" role="button">
+                        <a href="produto_detalhe.php?id_produto=<?php echo $row_destaque['id_produto']; ?>" class="btn btn-danger" role="button">
                             <span class="hidden-xs">
                                 Saiba mais...
                             </span>
-                            <span class="visible-xs glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            <span class="visible-xs glyphicon glyphicon-eye-open" aria-hidden="true">
                             </span>
                         </a>
                     </p>
@@ -68,10 +68,10 @@ $totalRows  =   ($lista)->num_rows;
             </div>
         </div>
         <!-- Fecha thumbnail/card -->
-        <?php } while ($row=$lista->fetch_assoc()); ?>
+        <?php } while ($row_destaque=$lista_destaque->fetch_assoc()); ?>
         <!-- Fecha a Estrutura de Repetição -->
     </div>
-    
+       
     <!-- CODIGO DESABILITADO PARA NÃO HAVER CONFLITO -->
     <!-- Link arquivos Bootstrap js -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -79,4 +79,4 @@ $totalRows  =   ($lista)->num_rows;
 </body>
 
 </html>
-<?php mysqli_free_result($lista); ?>
+<?php mysqli_free_result($lista_destaque); ?>

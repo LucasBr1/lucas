@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-br">
+
 <head>
     <title>Área Administrativa</title>
     <meta charset="utf-8">
@@ -8,24 +9,25 @@
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../css/bootstrap.min.css" rel="stylesheet"> -->
-</head>    
+</head>
+
 <body>
     <nav class="nav navbar-inverse">
         <div class="container-fluid">
-           <!-- Agrupamento para exibição MOBILE -->
+            <!-- Agrupamento para exibição MOBILE -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar" aria-expanded="false">
                     <span class="sr-only">Toogle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    
+
                 </button>
                 <a href="" class="navbar-brand">
                     <img src="../imagens/logochurrascopequeno.png" alt="">
                 </a>
             </div>
-            
+
             <!-- nav direita -->
             <div class="collapse navbar-collapse" id="defaultNavbar">
                 <ul class="nav navbar-nav navbar-right">
@@ -40,16 +42,17 @@
                     </li>
                     <li>
                         <a href="logout.php">
-                        <span class="glyphicon glyphicon-log-out"></span>
+                            <span class="glyphicon glyphicon-log-out"></span>
                         </a>
                     </li>
                 </ul>
             </div><!-- fechamento nav direita -->
         </div><!-- fechamento container-fluid -->
     </nav>
-<!-- CODIGO DESABILITADO PARA NÃO HAVER CONFLITO -->
-<!-- Link arquivos Bootstrap js -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- CODIGO DESABILITADO PARA NÃO HAVER CONFLITO -->
+    <!-- Link arquivos Bootstrap js -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script> -->
-</body>    
+</body>
+
 </html>
